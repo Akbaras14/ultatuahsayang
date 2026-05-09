@@ -156,7 +156,7 @@
   font-family: 'Segoe UI', sans-serif;
   font-weight: 900;
   font-size: 14px;
-  color: #777;
+  color: #DBD9D9;
   text-transform: uppercase;
   letter-spacing: 3px;
   text-shadow: 
@@ -205,7 +205,7 @@
 }
 
 .power-light.off {
-  background: #222;
+  background: #F50000;
 }
 
 /* Boot sequence animations */
