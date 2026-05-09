@@ -1,0 +1,337 @@
+/* styles/crt.css */
+.crt-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.crt-bezel {
+  position: relative;
+  width: 95vw;
+  max-width: 1000px;
+  height: 75vh;
+  max-height: 750px;
+  background: #2c2c2c;
+  border-radius: 40px;
+  padding: 15px 15px 40px 15px;
+  box-shadow: 
+    inset 0 0 50px rgba(0,0,0,0.8),
+    20px 20px 60px rgba(0,0,0,0.5);
+  border: 12px solid #3a3a3a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+/* Specific adjustments for laptop screens */
+@media (max-height: 800px) {
+  .crt-bezel {
+    height: 85vh;
+    border-width: 8px;
+    border-radius: 30px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .crt-bezel {
+    width: 90vw;
+  }
+}
+
+.crt-screen-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,1);
+  transform: perspective(1000px) rotateX(1deg);
+}
+
+.crt-screen {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+/* Curvature Effect */
+.crt-screen::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+.crt-screen::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.27861; }
+  5% { opacity: 0.34769; }
+  10% { opacity: 0.23604; }
+  15% { opacity: 0.90626; }
+  20% { opacity: 0.18128; }
+  25% { opacity: 0.83891; }
+  30% { opacity: 0.65583; }
+  35% { opacity: 0.57807; }
+  40% { opacity: 0.26559; }
+  45% { opacity: 0.84693; }
+  50% { opacity: 0.96019; }
+  55% { opacity: 0.08594; }
+  60% { opacity: 0.20313; }
+  65% { opacity: 0.71988; }
+  70% { opacity: 0.53455; }
+  75% { opacity: 0.37288; }
+  80% { opacity: 0.71428; }
+  85% { opacity: 0.70419; }
+  90% { opacity: 0.7003; }
+  95% { opacity: 0.36108; }
+  100% { opacity: 0.24387; }
+}
+
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 16, 16, 0) 0%,
+    rgba(18, 16, 16, 0.1) 50%,
+    rgba(18, 16, 16, 0) 100%
+  );
+  background-size: 100% 4px;
+  animation: scanline 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+.crt-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.5) 100%);
+  pointer-events: none;
+}
+
+.monitor-brand {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 900;
+  font-size: 14px;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 
+    1px 1px 1px rgba(255,255,255,0.1),
+    -1px -1px 1px rgba(0,0,0,0.8);
+  opacity: 0.6;
+  pointer-events: none;
+  width: 100%;
+  text-align: center;
+}
+
+.power-button {
+  position: absolute;
+  bottom: 12px;
+  right: 40px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #444, #222);
+  border-radius: 50%;
+  border: 2px solid #555;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.1s;
+}
+
+.power-button:active {
+  transform: scale(0.9);
+}
+
+.power-light {
+  position: absolute;
+  bottom: 18px;
+  right: 25px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.power-light.on {
+  background: #3f3;
+  box-shadow: 0 0 5px #3f3;
+}
+
+.power-light.off {
+  background: #222;
+}
+
+/* Boot sequence animations */
+.screen-boot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 10;
+  animation: boot-flash 0.8s ease-out forwards;
+}
+
+.boot-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.welcome-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.welcome-text {
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.progress-container {
+  width: 200px;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 100%;
+  background: #ffb7c5;
+  position: absolute;
+  left: -100%;
+  animation: progress-slide 2s ease-in-out forwards;
+}
+
+@keyframes progress-slide {
+  0% { left: -100%; }
+  100% { left: 0%; }
+}
+
+.boot-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.boot-logo-text {
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+.boot-logo-sub {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-top: 5px;
+}
+
+.loading-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: loading-dot 1.5s infinite ease-in-out;
+}
+
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+.dot:nth-child(4) { animation-delay: 0.6s; }
+.dot:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes loading-dot {
+  0%, 100% { transform: scale(0.3); opacity: 0.3; }
+  50% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes boot-flash {
+  0% { transform: scaleY(0.005) scaleX(0); opacity: 1; }
+  20% { transform: scaleY(0.005) scaleX(1); opacity: 1; }
+  50% { transform: scaleY(1) scaleX(1); opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.screen-off {
+  background: #000 !important;
+}
+
